@@ -1,0 +1,25 @@
+.background-element {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.background-element img {
+    position: relative;
+    width: 93%;
+    margin-top: 5.5rem;
+}
+
+.background-dots {
+    position: absolute;
+    top: 546px;
+    left: 1544px;
+    z-index: 1;
+}
+
+.background-dots img {
+    position: relative;
+    width: 93%;
+    margin-top: 5.5rem;
+}

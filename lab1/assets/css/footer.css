@@ -1,0 +1,82 @@
+.main-footer {
+    justify-content: space-between;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    display: flex;
+    align-items: end;
+    border-radius: 0;
+    background-image: linear-gradient(to top, #5A98F2, #67C3F3);
+    height: 8rem;
+    position: relative;
+    z-index: 5;
+    padding-bottom: 1.5rem;
+}
+
+.footer-nav {
+    display: flex;
+    list-style-type: none;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 80%;
+    padding: 0;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.footer-nav ul {
+    display: flex;
+    list-style-type: none;
+    align-items: center;
+}
+
+.footer-nav li a {
+    width: 100%;
+    align-items: center;
+}
+
+.footer-link {
+    color: white;
+    margin-right: 5rem;
+    margin-left: 9rem;
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 3.75rem;
+
+}
+
+.footer-logo {
+    margin-left: 10rem;
+    margin-right: 15rem;
+}
+
+.footer-dots--top img {
+    position: relative;
+    top: 16px;
+    z-index: 2;
+    opacity: 100%;
+    width: 7%
+}
+
+.footer-dots--top {
+    display: flex;
+    position: absolute;
+    justify-content: end;
+    bottom: -260px;
+    width: 95%;
+}
+
+.footer-dots--bottom img {
+    position: absolute;
+    top: 75px;
+    left: -20px;
+    z-index: 1;
+    opacity: 100%;
+    width: 7%;
+}
+
+.footer-dots--bottom {
+    display: flex;
+    width: 100%;
+}
