@@ -1,0 +1,28 @@
+.main-header {
+    padding: 1rem;
+}
+
+.main-nav {
+    justify-content: space-between;
+    width: 76%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+}
+
+.main-nav ul {
+    display: flex;
+    list-style-type: none;
+}
+
+.nav-link {
+    color: #1F1534;
+    margin-left: 2rem;
+    text-decoration: none;
+    opacity: 50%;
+}
+
+.nav-link--active {
+    font-weight: bold;
+    opacity: 100%;
+}
