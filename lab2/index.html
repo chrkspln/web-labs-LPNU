@@ -1,175 +1,116 @@
-<!DOCTYPE html>
-<html class="no-js" lang="en">
+<!doctype html>
+<html lang="en">
 
 <head>
     <link rel="stylesheet" href="assets/css/index.css">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width initial-scale=1.0">
+    <meta name="viewport" content="width=device-width" initial-scale="1.0">
     <title>Trafalgar Health Services</title>
 </head>
 
 <body>
-<header class="main-header">
-    <nav class="main-nav">
-        <div class="logo">
-            <img src="assets/images/logo.png" alt="Trafalgar logo">
+<div class="header-container">
+    <header id="header">
+        <div id="header__menu__open" onclick="openMenu()">
+            <img src="assets/images/menu-open.svg" alt="Menu icon">
         </div>
-        <ul class="nav-list">
-            <li class="nav-item">
-                <a class="nav-link nav-link--active" href="">
-                    Home
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="">
-                    Find a doctor
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="">
-                    Apps
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="">
-                    Testimonials
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="">
-                    About us
-                </a>
-            </li>
-        </ul>
-    </nav>
-</header>
+        <div id="header__menu__close" onclick="closeMenu()">
+            <img src="assets/images/menu-close.svg" alt="Menu icon">
+        </div>
+        <a id="header__logo" href=""><img src="./assets/images/logo.png" alt="logo"></a>
+        <a id="space"></a>
+        <nav id="header__nav">
+            <ul>
+                <li id="line" class="header__nav-item"><a id="active-page" href="">Home</a></li>
+                <li class="header__nav-item"><a class="not-active-page" href="">Find a doctor</a></li>
+                <li class="header__nav-item"><a class="not-active-page" href="">Apps</a></li>
+                <li class="header__nav-item"><a class="not-active-page" href="">Testimonials</a></li>
+                <li class="header__nav-item"><a class="not-active-page" href="">About us</a></li>
+            </ul>
+        </nav>
+    </header>
+</div>
+
 
 <main>
-    <div class="background-element">
-        <img src="assets/images/bg_dots1.png" alt="Background element">
-    </div>
-
     <section class="hero-section">
         <div class="hero-content">
-            <h1 class="hero-title">
-                Virtual healthcare for you
-            </h1>
-            <p class="hero-description">
-                Trafalgar provides progressive, and
-                affordable healthcare, accessible on mobile and online for everyone
-            </p>
-            <a href="" class="cta-button">
-                Consult today
-            </a>
+            <h1 class="hero-title">Virtual healthcare for you</h1>
+            <p class="hero-description">Trafalgar provides progressive, and affordable healthcare, accessible on mobile and
+                online for everyone</p>
+            <a href="" class="cta-button">Consult today</a>
         </div>
         <div class="hero-image">
-            <img src="assets/images/header_pic1.png" alt="Trafalgar header illustration">
+            <img src="assets/images/header_pic1.png" alt="Trafalgar header 1 pic">
         </div>
     </section>
 
     <section class="providers-section">
         <div class="providers-image">
-            <img src="assets/images/header_pic2.png" alt="Trafalgar illustration">
+            <img src="assets/images/header_pic2.png" alt="Trafalgar header 2 pic">
         </div>
         <div class="providers-content">
-            <h2 class="section-title">
-                Leading healthcare providers
-            </h2>
+            <h2 class="section-title">Leading healthcare providers</h2>
             <hr class="section-divider">
-            <p class="section-description">
-                Trafalgar provides progressive, and affordable healthcare,
-                accessible on mobile and online for everyone. To us, it's not just work.
-                We take pride in the solutions we deliver
-            </p>
-            <a href="" class="secondary-button">
-                Learn more
-            </a>
+            <p class="section-description">Trafalgar provides progressive, and affordable healthcare, accessible on mobile
+                and
+                online for everyone. To us, it's not just work. We take pride in the solutions we deliver</p>
+            <a href="" class="secondary-button">Learn more</a>
         </div>
     </section>
 
     <section class="services-section">
-        <div class="background-element">
-            <img src="assets/images/bg_blob_element.png" alt="Background blob">
-        </div>
         <div class="services-intro">
-            <h2 class="section-title">
-                Our services
-            </h2>
+            <h2 class="section-title">Our services</h2>
             <hr class="section-divider">
             <p class="section-description">
-                We provide to you the best choices for you. Adjust it to your health needs and
-                make sure you undergo treatment with our highly qualified doctors
-                you can consult with us which type of service is suitable for your health
+                We provide to you the best choices for you. Adjust it to your health needs and make sure you undergo treatment
+                with our highly qualified doctors you can consult with us which type of service is suitable for your health
             </p>
+        </div>
+        <div class="background-element">
+            <img src="assets/images/bg_blob_element.png" alt="Background blob element">
         </div>
         <div class="background-dots">
             <img src="assets/images/bg_dots4.png" alt="Background dots">
         </div>
         <div class="services-grid">
             <div class="service-card">
-                <img src="assets/images/magnifying_glass.png" class="service-icon" alt="Search doctor icon">
-                <h4 class="service-title">
-                    Search doctor
-                </h4>
-                <p class="service-description">
-                    Choose your doctor from thousands of specialist,
-                    general, and trusted hospitals
-                </p>
+                <img src="assets/images/magnifying_glass.png" class="service-icon" alt="Magnifying glass icon">
+                <h4 class="service-title">Search doctor</h4>
+                <p class="service-description">Choose your doctor from thousands of specialist, general, and trusted
+                    hospitals</p>
             </div>
             <div class="service-card">
-                <img src="assets/images/jar.png" class="service-icon" alt="Online pharmacy icon">
-                <h4 class="service-title">
-                    Online pharmacy
-                </h4>
-                <p class="service-description">
-                    Buy your medicines with our mobile application
-                    with a simple delivery system
-                </p>
+                <img src="assets/images/jar.png" class="service-icon" alt="Pharmacy jar icon">
+                <h4 class="service-title">Online pharmacy</h4>
+                <p class="service-description">Buy your medicines with our mobile application with a simple delivery
+                    system</p>
             </div>
             <div class="service-card">
                 <img src="assets/images/contact.png" class="service-icon" alt="Consultation icon">
-                <h4 class="service-title">
-                    Consultation
-                </h4>
-                <p class="service-description">
-                    Free consultation with our trusted doctors
-                    and get the best recommendations
-                </p>
+                <h4 class="service-title">Consultation</h4>
+                <p class="service-description">Free consultation with our trusted doctors and get the best recommendations</p>
             </div>
             <div class="service-card">
                 <img src="assets/images/patient_card.png" class="service-icon" alt="Details info icon">
-                <h4 class="service-title">
-                    Details info
-                </h4>
-                <p class="service-description">
-                    Free consultation with our trusted doctors
-                    and get the best recommendations
-                </p>
+                <h4 class="service-title">Details info</h4>
+                <p class="service-description">Free consultation with our trusted doctors and get the best recommendations</p>
             </div>
             <div class="service-card">
-                <img src="assets/images/medkit.png" class="service-icon" alt="Emergency care icon">
-                <h4 class="service-title">
-                    Emergency care
-                </h4>
-                <p class="service-description">
-                    You can get 24/7 urgent care for yourself
-                    or your children and your lovely family
-                </p>
+                <img src="assets/images/medkit.png" class="service-icon" alt="Emergency care med kit icon">
+                <h4 class="service-title">Emergency care</h4>
+                <p class="service-description">You can get 24/7 urgent care for yourself or your children and your lovely
+                    family</p>
             </div>
             <div class="service-card">
-                <img src="assets/images/med_report.png" class="service-icon" alt="Tracking icon">
-                <h4 class="service-title">
-                    Tracking
-                </h4>
-                <p class="service-description">
-                    Track and save your medical history and health data
-                </p>
+                <img src="assets/images/med_report.png" class="service-icon" alt="Med report icon">
+                <h4 class="service-title">Tracking</h4>
+                <p class="service-description">Track and save your medical history and health data</p>
             </div>
         </div>
         <div class="services-cta">
-            <a href="" class="secondary-button">
-                Learn more
-            </a>
+            <a href="" class="secondary-button">Learn more</a>
         </div>
         <div class="footer-dots footer-dots--top">
             <img src="assets/images/bg_dots3.png" alt="Footer top dots">
@@ -178,30 +119,28 @@
 </main>
 
 <footer class="main-footer">
+
     <nav class="footer-nav">
         <img src="assets/images/trafalgar.png" class="footer-logo" alt="Trafalgar logo">
         <ul class="footer-links">
             <li class="footer-item">
-                <a class="footer-link nav-link--active" href="">
-                    Company
-                </a>
+                <a class="footer-link" href="">Company</a>
             </li>
             <li class="footer-item">
-                <a class="footer-link nav-link--active" href="">
-                    Region
-                </a>
+                <a class="footer-link" href="">Region</a>
             </li>
             <li class="footer-item">
-                <a class="footer-link nav-link--active" href="">
-                    Help
-                </a>
+                <a class="footer-link" href="">Help</a>
             </li>
         </ul>
     </nav>
+
     <div class="footer-dots footer-dots--bottom">
-        <img src="assets/images/bg_dots3.png" alt="Footer bottom dots">
+        <img src="assets/images/bg_dots3.png" alt="Footer dots">
     </div>
+
 </footer>
+<script src="assets/js/main.js"></script>
 </body>
 
 </html>
