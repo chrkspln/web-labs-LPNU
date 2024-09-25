@@ -2,7 +2,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
     margin: 0 auto;
     background-image: linear-gradient(to top, #5A98F2, #67C3F3);
     height: auto;
@@ -10,17 +9,18 @@
     position: relative;
     overflow: hidden;
     z-index: 5;
+    flex-wrap: wrap;
 }
 
 .footer-nav {
-    margin: 0 auto;
-    padding: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
     width: 100%;
     max-width: 1350px;
+    margin: 0 auto;
+    padding: 0;
+    flex-wrap: wrap;
 }
 
 .footer-nav ul {
@@ -31,26 +31,29 @@
     flex-wrap: wrap;
 }
 
-.footer-nav li a {
-    width: 100%;
-    align-items: center;
+.footer-nav li {
+    /*margin-left: 1rem;*/
+    /*margin-right: 1rem;*/
+    flex-shrink: 0;
 }
 
 .footer-link {
     color: white;
-    margin-right: 5rem;
-    margin-left: 9rem;
     text-decoration: none;
     font-size: 1.25rem;
     font-weight: 700;
     line-height: 3.75rem;
-
+    margin: 0 1rem;
 }
 
 .footer-logo {
-    margin-left: 10rem;
-    margin-right: 15rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
     max-width: 150px;
+}
+
+.footer-dots--top img, .footer-dots--bottom img {
+    width: 7%;
 }
 
 .footer-dots--top {
@@ -58,15 +61,7 @@
     position: absolute;
     justify-content: end;
     bottom: -260px;
-    width: 95%;
-}
-
-.footer-dots--top img {
-    position: relative;
-    top: 16px;
-    z-index: 2;
-    opacity: 100%;
-    width: 7%
+    width: 100%;
 }
 
 .footer-dots--bottom {
@@ -79,7 +74,4 @@
     position: absolute;
     top: 75px;
     left: -20px;
-    z-index: 1;
-    opacity: 100%;
-    width: 7%;
 }

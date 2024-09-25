@@ -1,7 +1,7 @@
 #header {
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    width: 93%;
     max-width: 1100px;
     align-items: center;
     padding-top: 16px;
@@ -16,7 +16,7 @@
 .header_nav{
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    width: 93%;
     max-width: 1100px;
     align-items: center;
 }
@@ -61,4 +61,3 @@
     display: flex;
     justify-content: center;
 }
-
