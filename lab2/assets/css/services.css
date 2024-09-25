@@ -11,7 +11,7 @@
     max-width: 100%;
     text-align: center;
     margin-bottom: 40px;
-    padding: 0 1rem;
+    padding: 80px 1rem 0 1rem;
 }
 
 .services-intro .section-title {
@@ -96,33 +96,6 @@
     z-index: 2;
 }
 
-.background-element {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-}
-
-.background-element img {
-    position: relative;
-    width: 93%;
-    margin-top: 5.5rem;
-}
-
-.background-dots {
-    position: absolute;
-    top: 530px;
-    right: 180px;
-    z-index: 1;
-}
-
-.background-dots img {
-    position: relative;
-    width: 93%;
-    margin-top: 5.5rem;
-}
-
-
 .services-cta .secondary-button {
     font-weight: 700;
     font-size: 1rem;
@@ -132,9 +105,4 @@
     border-radius: 55px;
     padding: 0.75rem 2.5rem;
     margin-top: 1rem;
-}
-
-.background-element,
-.background-dots {
-    display: none;
 }
