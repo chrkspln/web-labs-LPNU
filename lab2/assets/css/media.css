@@ -148,11 +148,6 @@
         margin: 10px 0;
     }
 
-    .background-element,
-    .background-dots {
-        display: none;
-    }
-
     .services-grid {
         flex-direction: column;
         align-items: center;
@@ -506,7 +501,7 @@
 @media screen and (min-width: 1800px) {
     #header {
         transform: scale(1.42);
-        padding-bottom: 100px;
+        padding-bottom: 25px;
     }
     #header__login:hover {
         background-color: #fb8f1d;
