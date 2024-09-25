@@ -8,18 +8,18 @@
 .background-element img {
     position: relative;
     width: 93%;
-    margin-top: 5.5rem;
+    margin-top: 9rem;
 }
 
 .background-dots {
     position: absolute;
     top: 546px;
-    left: 1544px;
+    left: 1554px;
     z-index: 1;
 }
 
 .background-dots img {
     position: relative;
     width: 93%;
-    margin-top: 5.5rem;
+    margin-top: 5rem;
 }
