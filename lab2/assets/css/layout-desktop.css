@@ -1,0 +1,218 @@
+@media screen and (max-width: 960px) {
+    .burger__menu {
+        display: flex;
+    }
+
+    .nav-item {
+        display: none;
+    }
+
+    .main-nav ul {
+        display: none;
+    }
+
+    .burger__navbar {
+        display: none;
+        position: absolute;
+        background-color: #fff;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    #menu__toggle:checked ~ .burger__navbar {
+        display: flex;
+    }
+
+    .burger__navbar li {
+        margin: 10px 0;
+    }
+
+    .services-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .service-card {
+        width: 90%;
+    }
+
+    .services-intro .section-title {
+        font-size: 1.65rem;
+    }
+
+    .services-intro .section-description {
+        font-size: 0.95rem;
+    }
+
+    .hero-section {
+        flex-direction: column-reverse;
+        justify-content: space-evenly;
+    }
+
+    .hero-image {
+        margin-bottom: 2rem;
+        width: 70%;
+    }
+
+    .hero-title,
+    .hero-description {
+        width: 100%;
+    }
+
+    .hero-content {
+        text-align: center;
+        justify-content: space-evenly;
+        width: 100%;
+        margin: 0;
+    }
+
+    .providers-section {
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+
+    .providers-image {
+        margin-bottom: 2rem;
+        width: 70%;
+    }
+
+    .providers-content {
+        text-align: center;
+        justify-content: space-evenly;
+        width: 80%;
+        margin: 0;
+    }
+
+    .providers-content hr {
+        margin-left: auto;
+        margin-right: auto;
+        width: 20%;
+    }
+
+    .main-footer {
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem;
+        height: auto;
+    }
+
+    .footer-nav {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .footer-nav ul {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .footer-logo {
+        margin: 1rem 0;
+        max-width: 100px;
+    }
+
+    .footer-dots--top {
+        bottom: -150px;
+        justify-content: center;
+    }
+
+    .footer-dots--bottom img {
+        width: 15%;
+        left: 0;
+        top: 0;
+    }
+
+    .footer-dots--bottom {
+        justify-content: center;
+        margin-top: 1rem;
+    }
+}
+
+@media screen and (max-width: 2559px) and (min-width: 961px) {
+    .burger__menu {
+        display: none;
+    }
+
+    .providers-content .section-divider {
+        margin-left: 0;
+    }
+
+    .burger__navbar {
+        position: static;
+        display: none;
+    }
+
+    .main-header {
+        max-width: 90%;
+        margin: 0 auto;
+    }
+
+    .hero-section {
+        max-width: 90%;
+        margin: 0 auto;
+    }
+
+    .providers-section {
+        max-width: 90%;
+        margin: 0 auto;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-description {
+        font-size: 1.2rem;
+    }
+
+    .cta-button {
+        font-size: 1.3rem;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+    }
+
+    .section-description {
+        font-size: 1.2rem;
+    }
+
+    .service-title {
+        font-size: 1.4rem;
+    }
+
+    .service-description {
+        font-size: 1rem;
+    }
+
+    .footer-link {
+        font-size: 1.4rem;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .services-grid {
+        justify-content: center;
+        gap: 20px;
+        max-width: 1600px;
+    }
+
+    .service-card {
+        flex: 1 0 300px;
+    }
+
+    .services-intro .section-title {
+        font-size: 2.1rem;
+        line-height: 3.5rem;
+    }
+
+    .services-intro .section-description {
+        font-size: 1rem;
+        line-height: 1.875rem;
+    }
+}

@@ -1,0 +1,191 @@
+@media screen and (min-width: 1800px) {
+    #header {
+        transform: scale(1.42);
+        padding-bottom: 25px;
+    }
+    #header__login:hover {
+        background-color: #fb8f1d;
+        color: #ffffff;
+    }
+    #header__register:hover {
+        background-color: #ffffff;
+        color: #fb8f1d;
+        outline: 1px solid #fb8f1d;
+    }
+}
+@media screen and (min-width: 2200px) {
+    #header {
+        padding-bottom: 100px;
+        transform: scale(1.76);
+        z-index: 10;
+    }
+    #header__login:hover {
+        background-color: #fb8f1d;
+        color: #ffffff;
+    }
+    #header__register:hover {
+        background-color: #ffffff;
+        color: #fb8f1d;
+        border: 1px solid #fb8f1d;
+    }
+    #header__logo {
+        margin-left: 10%;
+    }
+}
+
+@media screen and (min-width: 2560px) {
+    .burger__menu {
+        display: none;
+    }
+    .header-container{
+        padding-top: 64px;
+    }
+
+    .burger__navbar {
+        position: static;
+        display: none;
+    }
+
+    .main-header {
+        max-width: 1600px;
+        padding: 2rem 3rem;
+        margin: 0 auto;
+    }
+
+    .main-nav {
+        max-width: 1600px;
+    }
+
+    .logo img {
+        max-width: 180px;
+    }
+
+    .nav-list {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+    }
+
+    .nav-item {
+        margin-left: 2.5rem;
+    }
+
+    .hero-section {
+        padding: 4rem 6rem;
+        justify-content: space-between;
+        max-width: 1600px;
+        margin: 0 auto;
+    }
+
+    .hero-title {
+        font-size: 3rem;
+        line-height: 5rem;
+    }
+
+    .hero-description {
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+
+    .hero-image {
+        width: 850px;
+    }
+
+    .cta-button {
+        font-size: 1.4rem;
+        padding: 1.25rem 3.5rem;
+    }
+
+    .providers-section {
+        max-width: 1600px;
+        justify-content: space-between;
+        padding: 3rem 5rem;
+    }
+
+    .providers-image {
+        width: 850px;
+    }
+
+    .providers-content {
+        width: 550px;
+    }
+
+    .section-title {
+        font-size: 3rem;
+    }
+
+    .section-description {
+        font-size: 1.5rem;
+    }
+
+    .secondary-button {
+        font-size: 1.4rem;
+        padding: 1.25rem 3.5rem;
+    }
+
+    .services-section {
+        max-width: 1600px;
+        padding: 4rem 6rem;
+    }
+
+    .services-intro .section-title {
+        font-size: 3rem;
+        line-height: 3.5rem;
+    }
+
+    .services-intro .section-description {
+        font-size: 1.4rem;
+        line-height: 2rem;
+    }
+
+    .services-grid {
+        width: 100%;
+        gap: 2.5rem;
+    }
+
+    .service-card {
+        max-width: 480px;
+        padding: 2.5rem;
+    }
+
+    .service-title {
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+
+    .service-description {
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+    }
+
+    .main-footer {
+        padding: 3rem 4rem;
+        margin: 0 auto;
+    }
+
+    .footer-nav {
+        max-width: 2000px;
+    }
+
+    .footer-logo {
+        max-width: 180px;
+    }
+
+    .footer-link {
+        font-size: 1.5rem;
+        line-height: 3.5rem;
+    }
+
+    .footer-dots--top img,
+    .footer-dots--bottom img {
+        width: 10%;
+    }
+
+    .footer-dots--top {
+        bottom: -300px;
+    }
+
+    .footer-dots--bottom img {
+        top: 100px;
+    }
+}
