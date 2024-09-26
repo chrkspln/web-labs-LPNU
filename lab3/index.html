@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfume Store</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+<header>
+    <h1>Perfume Store</h1>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Perfumes</a></li>
+            <li><a href="#">About Us</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <div class="controls">
+        <label for="searchInput"></label><input type="text" id="searchInput" placeholder="Search perfumes by name">
+        <button onclick="sortByName()">Sort by Name</button>
+        <button onclick="sortByPrice()">Sort by Price</button>
+    </div>
+
+    <div id="perfumeList" class="perfume-container"></div>
+
+    <div class="total-price">
+        <button onclick="calculateTotal()">Calculate Total Price</button>
+        <p>Total Price: $<span id="totalPrice">0.00</span></p>
+    </div>
+</main>
+
+<footer>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
