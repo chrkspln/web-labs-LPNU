@@ -4,31 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfume Store</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/index.css">
 </head>
 <body>
 <header>
     <h1>Perfume Store</h1>
-    <nav>
+    <nav class="header__nav">
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Perfumes</a></li>
-            <li><a href="#">About Us</a></li>
+            <li><a>Home</a></li>
+            <li><a>Perfumes</a></li>
+            <li><a>About Us</a></li>
         </ul>
     </nav>
 </header>
 
 <main>
     <div class="controls">
-        <label for="searchInput"></label><input type="text" id="searchInput" placeholder="Search perfumes by name">
-        <button onclick="sortByName()">Sort by Name</button>
-        <button onclick="sortByPrice()">Sort by Price</button>
+        <label for="searchInput"></label>
+        <input type="text" id="searchInput" placeholder="Search perfumes...">
+        <button onclick="sortByName()" class="btn-name-sort">
+            Sort by name
+        </button>
+        <button onclick="sortByPrice()" class="btn-price-sort">
+            Sort by price
+        </button>
     </div>
 
     <div id="perfumeList" class="perfume-container"></div>
 
     <div class="total-price">
-        <button onclick="calculateTotal()">Calculate Total Price</button>
+        <button onclick="calculateTotal()" class="btn-total-price">Calculate total price of all perfumes...</button>
         <p>Total Price: $<span id="totalPrice">0.00</span></p>
     </div>
 </main>
