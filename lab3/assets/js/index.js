@@ -40,7 +40,7 @@ const perfumes = [
         volume: "30ml"
     }
 ];
-let displayedPerfumes = perfumes.slice(); // Initially, all perfumes are displayed
+let displayedPerfumes = perfumes.slice();
 
 
 function createPerfumeCard(perfume) {
@@ -57,9 +57,9 @@ function createPerfumeCard(perfume) {
 }
 
 function displayPerfumes(perfumes) {
-    displayedPerfumes = perfumes; // Update displayed items
+    displayedPerfumes = perfumes;
     const list = document.getElementById('perfumeList');
-    list.innerHTML = ''; // Clear existing content
+    list.innerHTML = '';
 
     perfumes.forEach(perfume => {
         const perfumeCard = createPerfumeCard(perfume);
