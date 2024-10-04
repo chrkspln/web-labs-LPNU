@@ -19,7 +19,7 @@ const perfumes = [
         id: 3,
         name: "Marry Me!",
         brand: "Lanvin",
-        price: 907,
+        price: 1007,
         scent: "Floral, Fruity",
         volume: "30ml"
     },
@@ -40,6 +40,8 @@ const perfumes = [
         volume: "30ml"
     }
 ];
+let displayedPerfumes = perfumes.slice(); // Initially, all perfumes are displayed
+
 
 function createPerfumeCard(perfume) {
     const perfumeDiv = document.createElement('div');
@@ -55,6 +57,7 @@ function createPerfumeCard(perfume) {
 }
 
 function displayPerfumes(perfumes) {
+    displayedPerfumes = perfumes; // Update displayed items
     const list = document.getElementById('perfumeList');
     list.innerHTML = ''; // Clear existing content
 
@@ -65,7 +68,7 @@ function displayPerfumes(perfumes) {
 }
 
 function sortPerfumes(criterion) {
-    const sortedPerfumes = perfumes.slice().sort((a, b) => {
+    const sortedPerfumes = displayedPerfumes.slice().sort((a, b) => {
         if (criterion === 'name') return a.name.localeCompare(b.name);
         else if (criterion === 'price') return a.price - b.price;
     });
@@ -96,7 +99,7 @@ function handleSearchInput() {
 searchInput.addEventListener('input', handleSearchInput);
 
 function calculateTotal() {
-    const total = perfumes.reduce((sum, perfume) => sum + perfume.price, 0);
+    const total = displayedPerfumes.reduce((sum, perfume) => sum + perfume.price, 0);
     document.getElementById('totalPrice').textContent = total.toFixed(2);
 }
 
