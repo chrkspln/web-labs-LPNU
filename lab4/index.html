@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfume Store</title>
+    <link rel="stylesheet" href="assets/css/index.css">
+</head>
+<body>
+<header>
+    <h1>Perfume Store</h1>
+    <nav class="header__nav">
+        <ul>
+            <li>
+                <a>Home</a>
+            </li>
+            <li>
+                <a>Create form</a>
+            </li>
+            <li>
+                <a>Collections</a>
+            </li>
+            <li>
+                <a>Support</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <div class="controls">
+        <label for="searchInput"></label>
+        <input type="text" id="searchInput" placeholder="Search perfumes...">
+        <button onclick="sortByName()" id="nameSortButton" class="btn-name-sort">
+            Sort by name
+        </button>
+        <button onclick="sortByPrice()" id="priceSortButton" class="btn-price-sort">
+            Sort by price
+        </button>
+    </div>
+
+    <div id="perfumeList" class="perfume-container"></div>
+
+    <div class="total-price">
+        <button onclick="calculateTotal()" id="calculateTotalPriceButton" class="btn-total-price">
+            Calculate total price of all perfumes...
+        </button>
+        <p>Total Price: ₴<span id="totalPrice">0.00</span>
+        </p>
+    </div>
+    <div id="createPage" class="create_container">
+        <form id="newForm" class="new-form">
+            <h2>Create order for perfume</h2>
+            <div class="create-block">
+                <span>
+                    Your full name
+                </span>
+                <label for="nameInput"></label><input type="text" placeholder="Your name and surname..." id="nameInput">
+                <span>
+                    Destination
+                </span>
+                <label for="destinationInput"></label><textarea placeholder="Destination..." id="destinationInput"></textarea>
+                <span>
+                    Perfume:
+                </span>
+                <label for="brandInput"></label><select id="brandInput">
+                    <option value="Suu">Suu... (Masaki Matsushima)</option>
+                    <option value="Mat">Mat. (Masaki Matsushima)</option>
+                    <option value="Marry">Marry Me! (Lanvin)</option>
+                    <option value="DEte">Parfum d`Ete (Kenzo)</option>
+                    <option value="Noa">Noa (Cacharel)</option>
+                </select>
+                <span>
+                    Order date:
+                </span>
+                <label for="orderDateInput"></label><input type="date" id="orderDateInput">
+                <span>
+                    Price:
+                </span>
+                <label for="priceInput"></label><input placeholder="Price in ₴" type="number" id="priceInput">
+            </div>
+            <button type="submit" class="btn-download" id="submitNewFormButton">Add order</button>
+        </form>
+    </div>
+    <div id="editPage" class="edit_container">
+        <form id="editForm" class="add-form">
+            <h2>Edit order for perfume</h2>
+            <div class="create-block">
+                <span>
+                    Your full name
+                </span>
+                <label for="editNameInput"></label><input type="text" placeholder="Your name and surname..." id="editNameInput">
+                <span>
+                    Destination
+                </span>
+                <label for="editDestinationInput"></label><textarea placeholder="Destination..." id="editDestinationInput"></textarea>
+                <span>
+                    Perfume:
+                </span>
+                <label for="editBrandInput"></label>
+                <select id="editBrandInput">
+                    <option value="Suu">Suu... (Masaki Matsushima)</option>
+                    <option value="Mat">Mat. (Masaki Matsushima)</option>
+                    <option value="Marry">Marry Me! (Lanvin)</option>
+                    <option value="DEte">Parfum d`Ete (Kenzo)</option>
+                    <option value="Noa">Noa (Cacharel)</option>
+                </select>
+                <span>
+                    Order date:
+                </span>
+                <label for="editOrderDateInput"></label><input type="date" id="editOrderDateInput">
+                <span>
+                    Price:
+                </span>
+                <label for="editPriceInput"></label><input placeholder="Price in $" type="number" id="editPriceInput">
+            </div>
+            <button type="submit" class="btn-download" id="editFormButton">Edit order</button>
+        </form>
+    </div>
+</main>
+
+<footer>
+</footer>
+
+<script src="assets/js/index.js"></script>
+</body>
+</html>
