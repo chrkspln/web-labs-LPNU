@@ -1,0 +1,10 @@
+footer {
+    background-color: cornflowerblue;
+    color: white;
+    text-align: center;
+    margin-top: 20px;
+}
+
+footer p {
+    margin: 0;
+}
