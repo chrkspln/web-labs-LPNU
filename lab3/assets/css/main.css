@@ -30,3 +30,53 @@ main {
     color: #666;
     font-size: 0.9rem;
 }
+
+.perfume-form {
+    margin: 20px auto;
+    padding: 20px;
+    width: 300px;
+    border: 2px darkgrey dotted;
+    border-radius: 8px;
+    background-color: antiquewhite;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.perfume-form form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.perfume-form form label {
+    width: 100%;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.perfume-form form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid white;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-size: 1rem;
+}
+
+.perfume-form button {
+    width: 75%;
+    padding: 10px;
+    margin-bottom: 30px;
+    margin-left: 12.5%;
+    background-color: cornflowerblue;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.perfume-form button:hover {
+    background-color: royalblue;
+}

@@ -111,6 +111,8 @@ document.addEventListener("DOMContentLoaded", () => {
     displayPerfumes(perfumes);
 });
 
+// !!! LAB 4 CODE STARTS HERE !!!
+
 function deletePerfume(id) {
     if (confirm("Are you sure you want to delete this perfume?")) {
         const index = perfumes.findIndex(perfume => perfume.id === id);
