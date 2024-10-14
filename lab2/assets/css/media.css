@@ -250,10 +250,12 @@
         margin-top: 1rem;
     }
 }
+
 @media screen and (max-width: 768px) {
     body.open {
         overflow-y: hidden;
     }
+
     #header {
         margin-top: 10px;
         z-index: 10;
@@ -271,6 +273,7 @@
         right: 10px;
         z-index: 12;
     }
+
     #header__menu__open.open {
         display: none;
     }
@@ -282,6 +285,7 @@
         position: fixed;
         z-index: 13;
     }
+
     #header__menu__close.open {
         display: flex;
         margin-top: 5px;
@@ -326,6 +330,7 @@
         animation: slideIn 0.8s ease-out;
         animation-fill-mode: forwards;
     }
+
     #header__nav.hide ul {
         margin: 0;
         display: flex;
@@ -334,6 +339,7 @@
         padding-top: 50px;
         padding-left: 0;
     }
+
     #header__nav.hide {
         position: fixed;
         top: 0;
@@ -346,6 +352,7 @@
         animation: slideOut 1s ease-out;
         animation-fill-mode: forwards;
     }
+
     @keyframes slideIn {
         0% {
             transform: translateX(-100%);
@@ -405,14 +412,17 @@
         margin-bottom: 10px;
         font-size: 16px;
     }
+
     #log__reg {
         position: relative;
         right: -15px;
     }
+
     #space {
         display: none;
     }
 }
+
 @media screen and (max-width: 2559px) and (min-width: 961px) {
     .burger__menu {
         display: none;
@@ -503,31 +513,37 @@
         transform: scale(1.42);
         padding-bottom: 25px;
     }
+
     #header__login:hover {
         background-color: #fb8f1d;
         color: #ffffff;
     }
+
     #header__register:hover {
         background-color: #ffffff;
         color: #fb8f1d;
         outline: 1px solid #fb8f1d;
     }
 }
+
 @media screen and (min-width: 2200px) {
     #header {
         padding-bottom: 100px;
         transform: scale(1.76);
         z-index: 10;
     }
+
     #header__login:hover {
         background-color: #fb8f1d;
         color: #ffffff;
     }
+
     #header__register:hover {
         background-color: #ffffff;
         color: #fb8f1d;
         border: 1px solid #fb8f1d;
     }
+
     #header__logo {
         margin-left: 10%;
     }
@@ -537,7 +553,8 @@
     .burger__menu {
         display: none;
     }
-    .header-container{
+
+    .header-container {
         padding-top: 64px;
     }
 
