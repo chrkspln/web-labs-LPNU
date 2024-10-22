@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Perfume Store</title>
+    <link rel="stylesheet" href="../static/css/index.css">
+</head>
+<body>
+<header>
+    <h1>Perfume Store</h1>
+    <nav class="header__nav">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Collections</a></li>
+            <li><a href="#">Support</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <div class="controls">
+        <label for="searchInput"></label>
+        <input id="searchInput" placeholder="Search perfumes..." type="text" oninput="filterPerfumesByName()">
+        <button class="btn-name-sort" onclick="sortPerfumesByName()">Sort by name</button>
+        <button class="btn-price-sort" onclick="sortPerfumesByPrice()">Sort by price</button>
+    </div>
+
+    <div class="perfume-container" id="perfumeList"></div>
+
+    <div class="total-price">
+        <button class="btn-total-price" onclick="calculateTotal()">Calculate total price of all perfumes</button>
+        <p>Total Price: ₴<span id="totalPrice">0.00</span></p>
+    </div>
+
+    <div class="perfume-form">
+        <h2>Manage Perfumes</h2>
+        <h3 id="formTitle">Add New Perfume</h3>
+        <button onclick="">Clear form to add new</button>
+        <form id="createEditForm" onsubmit="handleFormSubmit(event)">
+            <input type="hidden" id="perfumeId" />
+            <label for="name">Name:</label>
+            <input type="text" id="name" required />
+            <br />
+            <label for="brand">Brand:</label>
+            <input type="text" id="brand" required />
+            <br />
+            <label for="price">Price:</label>
+            <input type="number" id="price" required min="1" step="0.01" />
+            <br />
+            <label for="scent">Scent:</label>
+            <input type="text" id="scent" required />
+            <br />
+            <label for="volume">Volume:</label>
+            <input type="text" id="volume" required />
+            <br />
+            <button type="submit" id="submitForm">Save</button>
+        </form>
+    </div>
+</main>
+
+<script src="../static/js/index.js"></script>
+</body>
+</html>
