@@ -3,121 +3,70 @@ import {Repository} from "typeorm";
 import {CreatePerfumeDto} from "../dto/CreatePerfumeDto";
 import {UpdatePerfumeDto} from "../dto/UpdatePerfumeDto";
 import {SearchPerfumesOptionsDto} from "../dto/SearchPerfumesOptionsDto";
+import {NotFoundException} from "../exceptions/NotFoundException";
 
 export class PerfumeService {
 
     constructor(private readonly perfumeRepository: Repository<Perfume>) {}
 
-    async getPerfumeById(perfumeId: string): Promise<Perfume> {
-        try {
-            const perfume = await this.perfumeRepository
-                .createQueryBuilder("perfume")
-                .where("perfume.id = :perfumeId", { perfumeId })
-                .getOne();
+    async getPerfumeById(perfumeId: number): Promise<Perfume> {
+        const perfume = await this.perfumeRepository
+            .createQueryBuilder("perfume")
+            .where("perfume.id = :perfumeId", { perfumeId })
+            .getOne();
 
-            if (!perfume) {
-                throw new Error("Perfume not found");
-            }
-            return perfume;
-        } catch (error) {
-            throw error;
+        if (!perfume) {
+            throw new NotFoundException("Perfume not found");
         }
-    }
-
-    private async getPerfumeByBrand(brand: string): Promise<Perfume> {
-        try {
-            const perfume = await this.perfumeRepository
-                .createQueryBuilder("perfume")
-                .where("perfume.brand = :brand", { brand })
-                .getOne();
-
-            if (!perfume) {
-                throw new Error("Perfume not found");
-            }
-            return perfume;
-        } catch (error) {
-            throw error;
-        }
+        return perfume;
     }
 
     async getPerfumes(searchPerfumesOptionsDto: SearchPerfumesOptionsDto): Promise<Perfume[]> {
-        try {
-            const { sorted, searchTerm } = searchPerfumesOptionsDto;
-            const queryBuilder = this.perfumeRepository
-                .createQueryBuilder("perfume")
-                .where(`perfume.brand LIKE :searchTerm`, { searchTerm: `%${searchTerm}%` });
+        const { sorted, searchTerm } = searchPerfumesOptionsDto;
+        const queryBuilder = this.perfumeRepository.createQueryBuilder("perfume");
 
-            if (sorted) {
-                queryBuilder.orderBy("perfume.price", "ASC");
-            }
-
-            const perfumes = await queryBuilder.getMany();
-            if (!perfumes || perfumes.length === 0) {
-                throw new Error("Perfumes not found");
-            }
-            return perfumes;
-        } catch (error) {
-            throw error;
+        if (searchTerm) {
+            const terms = searchTerm.split(' ').filter(term => term.length > 0);
+            terms.forEach((term, index) => {
+                queryBuilder.andWhere(`LOWER(perfume.brand) LIKE LOWER(:term${index})`, { [`term${index}`]: `%${term}%` });
+            });
         }
+
+        if (sorted) {
+            queryBuilder.orderBy("perfume.price", "ASC");
+        }
+
+        const perfumes = await queryBuilder.getMany();
+        return perfumes;
     }
 
     async createPerfume(createPerfumeDto: CreatePerfumeDto): Promise<Perfume> {
-        try {
-            const { id, name, brand, price, scent, volume } = createPerfumeDto;
-            const perfume = this.perfumeRepository.create({ id, name, brand, price, scent, volume });
-            return this.perfumeRepository.save(perfume);
-        } catch (error) {
-            throw new Error(`Error creating perfume: ${error.message}`);
-        }
+        const perfume = this.perfumeRepository.create(createPerfumeDto);
+        return this.perfumeRepository.save(perfume);
     }
 
-    async updatePerfume(perfumeId: string, updatePerfumeDto: UpdatePerfumeDto): Promise<Perfume> {
-        try {
-            await this.perfumeRepository.update(perfumeId, updatePerfumeDto);
-            return await this.getPerfumeById(perfumeId);
-        } catch (error) {
-            throw new Error(`Error updating perfume: ${error.message}`);
-        }
+    async updatePerfume(perfumeId: number, updatePerfumeDto: UpdatePerfumeDto): Promise<Perfume> {
+        const perfume = await this.getPerfumeById(perfumeId);
+        Object.assign(perfume, updatePerfumeDto);
+        return await this.perfumeRepository.save(perfume);
     }
 
-    async deletePerfume(perfumeId: string): Promise<boolean> {
-        try {
-            const result = await this.perfumeRepository.delete(perfumeId);
-            return result.affected === 1;
-        } catch (error) {
-            throw new Error(`Error deleting perfume: ${error.message}`);
-        }
+    async deletePerfume(perfumeId: number): Promise<void> {
+        const perfume = await this.getPerfumeById(perfumeId);
+        await this.perfumeRepository.delete(perfume.id);
     }
 
     async sortPerfumesByName(): Promise<Perfume[]> {
-        try {
-            const perfumes = await this.perfumeRepository
-                .createQueryBuilder("perfume")
-                .orderBy("perfume.name", "ASC")
-                .getMany();
-
-            if (!perfumes || perfumes.length === 0) {
-                throw new Error("Perfumes not found");
-            }
-            return perfumes;
-        } catch (error) {
-            throw error;
-        }
+        return await this.perfumeRepository
+            .createQueryBuilder("perfume")
+            .orderBy("perfume.name", "ASC")
+            .getMany();
     }
 
     async sortPerfumesByPrice(): Promise<Perfume[]> {
-        try {
-            const perfumes = await this.perfumeRepository
-                .createQueryBuilder("perfume")
-                .orderBy("perfume.price", "ASC")
-                .getMany();
-
-            if (!perfumes || perfumes.length === 0) {
-                throw new Error("Perfumes not found");
-            }
-            return perfumes;
-        } catch (error) {
-            throw error;
-        }
+        return await this.perfumeRepository
+            .createQueryBuilder("perfume")
+            .orderBy("perfume.price", "ASC")
+            .getMany();
     }
 }
