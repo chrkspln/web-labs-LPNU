@@ -24,4 +24,3 @@ export function validationMiddleware(type: any): (request: Request, response: Re
             }
         });
     };
-};
