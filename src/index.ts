@@ -4,6 +4,7 @@ import * as bodyParser from "body-parser";
 import { AppDataSource } from "./dataSource";
 import * as dotenv from "dotenv";
 import PerfumeRouter from "./routers/PerfumeRouter";
+import {corsOptions} from "./utils/CorsOptions";
 dotenv.config();
 
 AppDataSource.initialize().then(async () => {
@@ -11,7 +12,7 @@ AppDataSource.initialize().then(async () => {
     const PORT = process.env.PORT || 3000;
     app.use(bodyParser.json());
     app.use("/perfumes", PerfumeRouter);
-    app.use(cors());
+    app.use(cors(corsOptions));
 
     app.listen(PORT, () => {
         console.log(`Express server has started on port ${PORT}`);
