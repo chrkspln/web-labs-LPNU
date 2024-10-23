@@ -1,3 +1,4 @@
+
 export class NotFoundException extends Error {
     public message: string;
     public statusCode: number;
