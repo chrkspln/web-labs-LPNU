@@ -3,10 +3,7 @@ import { validate } from 'class-validator';
 import { Request, Response, NextFunction } from 'express';
 
 export function validationMiddleware(type: any): (request: Request, response: Response, next: NextFunction) => void {
-    return (
-        request: Request,
-        response: Response,
-        next: NextFunction
+    return (request: Request, response: Response, next: NextFunction
     ): void => {
         const dtoObject = plainToClass(type, request.body);
 
@@ -23,4 +20,5 @@ export function validationMiddleware(type: any): (request: Request, response: Re
                 next();
             }
         });
-    };
+    }
+}
