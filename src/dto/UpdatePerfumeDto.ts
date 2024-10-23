@@ -2,9 +2,6 @@ import {IsOptional} from "class-validator";
 
 export class UpdatePerfumeDto {
     @IsOptional()
-    readonly id: number;
-
-    @IsOptional()
     readonly name: string;
 
     @IsOptional()
