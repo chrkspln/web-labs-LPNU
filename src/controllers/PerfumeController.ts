@@ -3,6 +3,8 @@ import {Request, Response} from "express";
 import {SearchPerfumesOptionsDto} from "../dto/SearchPerfumesOptionsDto";
 import {PerfumeService} from "../services/PerfumeService";
 import {CreatePerfumeDto} from "../dto/CreatePerfumeDto";
+import {NotFoundException} from "../exceptions/NotFoundException";
+import {BadRequestException} from "../exceptions/BadRequestException";
 
 export class PerfumeController {
 
@@ -10,21 +12,20 @@ export class PerfumeController {
 
     async getPerfumeById(request: Request, response: Response): Promise<Response> {
         try {
-            const perfumeId = request.params.id as string;
+            const perfumeId: number = parseInt(request.params.id as string);
             const perfume: Perfume = await this.perfumeService.getPerfumeById(perfumeId);
-            if (!perfume) {
-                return response.status(404).json({ message: 'Perfume not found' });
-            }
             return response.status(200).json(perfume);
         } catch (error) {
-            console.error("Error fetching perfume: ", error.message);
+            if (error instanceof NotFoundException) {
+                return response.status(404).json({ message: error.message });
+            }
             return response.status(500).json({ message: 'Failed to fetch perfume',  error: error.message });
         }
     }
 
     async getPerfumes(request: Request, response: Response): Promise<Response> {
         try {
-            const sorted = request.query.sorted === 'true';
+            const sorted = request.query.sorted === 'false';
             const searchTerm = typeof request.query.searchTerm === 'string' ? request.query.searchTerm : '';
 
             const searchPerfumesOptionsDto: SearchPerfumesOptionsDto = {sorted, searchTerm};
@@ -42,53 +43,60 @@ export class PerfumeController {
             const newPerfume = await this.perfumeService.createPerfume(createPerfumeDto);
             return response.status(201).json(newPerfume);
         } catch (error) {
-            console.error('Error creating perfume:', error.message);
+            if (error.code === "ER_DUP_ENTRY") {
+                return response.status(400).json({message: 'Camera with this manufacturer already exists'});
+            } else if (error instanceof BadRequestException) {
+                return response.status(400).json({ message: error.message });
+            } else if (error instanceof NotFoundException) {
+                return response.status(404).json({ message: error.message });
+            }
             return response.status(500).json({ message: 'Failed to create perfume', error: error.message });
         }
     }
 
     async updatePerfume(request: Request, response: Response): Promise<Response> {
         try {
-            const perfumeId: string = request.params.id as string;
+            const perfumeId: number = parseInt(request.params.id as string);
             const updatePerfumeDto = request.body as CreatePerfumeDto;
             const updatedPerfume = await this.perfumeService.updatePerfume(perfumeId, updatePerfumeDto);
             return response.status(200).json(updatedPerfume);
         } catch (error) {
-            console.error('Error updating perfume:', error.message);
+            if (error instanceof BadRequestException) {
+                return response.status(400).json({ message: error.message });
+            } else if (error instanceof NotFoundException) {
+                return response.status(404).json({ message: error.message });
+            }
             return response.status(500).json({ message: 'Failed to update perfume', error: error.message });
         }
     }
 
     async deletePerfume(request: Request, response: Response): Promise<Response> {
         try {
-            const perfumeId: string = request.params.id as string;
-            const deleted = await this.perfumeService.deletePerfume(perfumeId);
-            if (!deleted) {
-                return response.status(404).json({ message: 'Perfume not found' });
-            }
-            return response.status(204).send();
+            const perfumeId: number = parseInt(request.params.id as string);
+            const deletePerfume = await this.perfumeService.deletePerfume(perfumeId);
+            return response.status(204).send(deletePerfume);
         } catch (error) {
-            console.error('Error deleting perfume:', error.message);
+            if (error instanceof NotFoundException) {
+                return response.status(404).json({ message: error.message });
+            }
             return response.status(500).json({ message: 'Failed to delete perfume', error: error.message });
         }
     }
 
     async sortPerfumesByName(request: Request, response: Response): Promise<Response> {
         try {
-            const sortedPerfumes = await this.perfumeService.sortPerfumesByName();
+            const sortedPerfumes: Array<Perfume> = await this.perfumeService.sortPerfumesByName();
             return response.status(200).json(sortedPerfumes);
         } catch (error) {
-            console.error('Error sorting perfumes:', error.message);
             return response.status(500).json({ message: 'Failed to sort perfumes', error: error.message });
         }
     }
 
     async sortPerfumesByPrice(request: Request, response: Response): Promise<Response> {
         try {
-            const sortedPerfumes = await this.perfumeService.sortPerfumesByPrice();
+            const sortedPerfumes: Array<Perfume> = await this.perfumeService.sortPerfumesByPrice();
             return response.status(200).json(sortedPerfumes);
         } catch (error) {
-            console.error('Error sorting perfumes:', error.message);
             return response.status(500).json({ message: 'Failed to sort perfumes', error: error.message });
         }
     }
