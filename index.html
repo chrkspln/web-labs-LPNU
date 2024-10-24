@@ -22,8 +22,8 @@
     <div class="controls">
         <label for="searchInput"></label>
         <input id="searchInput" placeholder="Search perfumes..." type="text" oninput="filterPerfumesByName()">
-        <button class="btn-name-sort" onclick="sortByName()">Sort by name</button>
-        <button class="btn-price-sort" onclick="sortByPrice()">Sort by price</button>
+        <!-- <button class="btn-name-sort" onclick="fetchPerfumes(true, '')">Sort by name</button> -->
+        <button class="btn-price-sort" onclick="fetchPerfumes(true)">Sort by price</button>
     </div>
 
     <div class="perfume-container" id="perfumeList"></div>
@@ -36,8 +36,8 @@
     <div class="perfume-form">
         <h2>Manage Perfumes</h2>
         <h3 id="formTitle">Add New Perfume</h3>
-        <button onclick="">Clear form to add new</button>
-        <form id="createEditForm" onsubmit="handleFormSubmit(event)">
+        <button onclick="openFormToAddPerfume()">Clear form to add new</button>
+        <form id="createEditForm">
             <input type="hidden" id="perfumeId" />
             <label for="name">Name:</label>
             <input type="text" id="name" required />
