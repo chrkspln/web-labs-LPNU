@@ -9,7 +9,7 @@ function createPerfumeCard(perfume) {
   perfumeDiv.innerHTML = `
       <h3>${perfume.name}</h3>
       <p>Brand: ${perfume.brand}</p>
-      <p>Price: ₴${perfume.price.toFixed(2)}</p>
+      <p>Price: ₴${perfume.price ? parseFloat(perfume.price).toFixed(2) : 'N/A'}</p>
       <p>Scent: ${perfume.scent}</p>
       <p>Volume: ${perfume.volume}</p>
       <button onclick="openFormToEditPerfume(${perfume.id})">Edit</button>
@@ -18,7 +18,7 @@ function createPerfumeCard(perfume) {
   return perfumeDiv;
 }
 
-async function fetchPerfumes(searchTerm = '', sorted = false) {
+async function fetchPerfumes(sorted = false, searchTerm = '') {
   try {
     const response = await fetch(`${apiBaseUrl}/perfumes?sorted=${sorted}&searchTerm=${encodeURIComponent(searchTerm)}`);
     if (!response.ok) {
@@ -43,25 +43,26 @@ function displayPerfumes(perfumes) {
   });
 }
 
-function handleSearchInput() {
-  const searchTerm = searchInput.value.trim();
-  fetchPerfumes(searchTerm);
-}
-
-// add sorting
-
 function filterPerfumesByName(searchTerm) {
   const trimmedTerm = searchTerm.trim().toLowerCase();
-  return fetchPerfumes().filter(perfume =>
-    perfume.name.toLowerCase().includes(trimmedTerm)
-  );
+  return fetchPerfumes(true, trimmedTerm);
+}
+
+function handleSearchInput() {
+  const searchTerm = searchInput.value.trim();
+  filterPerfumesByName(searchTerm);
 }
 
 searchInput.addEventListener('input', handleSearchInput);
 
 async function calculateTotal() {
   const perfumes = await fetchPerfumes();
-  const total = perfumes.reduce((sum, perfume) => sum + perfume.price, 0);
+  console.log(perfumes);
+  let total = 0;
+  for (let i = 0; i < perfumes.length; i++) {
+    perfumes[i].price = parseFloat(perfumes[i].price);
+    total += perfumes[i].price;
+  }
   document.getElementById('totalPrice').textContent = total.toFixed(2);
 }
 
@@ -83,21 +84,22 @@ function openFormToAddPerfume() {
   editingPerfume = null;
   document.getElementById('formTitle').textContent = "Adding perfume to the store...";
   document.getElementById('createEditForm').reset();
-  document.getElementById('perfumeForm').style.display = 'block';
+  document.getElementById('createEditForm').style.display = 'block';
 }
 
 function openFormToEditPerfume(id) {
   fetchPerfumes().then(perfumes => {
     editingPerfume = perfumes.find(perfume => perfume.id === id);
+
+    document.getElementById('formTitle').textContent = "Editing existing perfume in the store...";
+    document.getElementById('perfumeId').value = editingPerfume.id;
+    document.getElementById('name').value = editingPerfume.name;
+    document.getElementById('brand').value = editingPerfume.brand;
+    document.getElementById('price').value = editingPerfume.price;
+    document.getElementById('scent').value = editingPerfume.scent;
+    document.getElementById('volume').value = editingPerfume.volume;
+    document.getElementById('createEditForm').style.display = 'block';
   });
-  document.getElementById('formTitle').textContent = "Editing existing perfume in the store...";
-  document.getElementById('perfumeId').value = editingPerfume.id;
-  document.getElementById('name').value = editingPerfume.name;
-  document.getElementById('brand').value = editingPerfume.brand;
-  document.getElementById('price').value = editingPerfume.price;
-  document.getElementById('scent').value = editingPerfume.scent;
-  document.getElementById('volume').value = editingPerfume.volume;
-  document.getElementById('perfumeForm').style.display = 'block';
 }
 
 document.getElementById('createEditForm').addEventListener('submit', async function (submitEvent) {
@@ -120,7 +122,7 @@ document.getElementById('createEditForm').addEventListener('submit', async funct
     if (editingPerfume) {
       // Update existing perfume
       const response = await fetch(`${apiBaseUrl}/perfumes/${editingPerfume.id}`, {
-        method: 'PUT',
+        method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(perfumeData),
       });
@@ -129,7 +131,7 @@ document.getElementById('createEditForm').addEventListener('submit', async funct
 
     } else {
       // Create new perfume
-      const response = await fetch('${apiBaseUrl}/perfumes', {
+      const response = await fetch(`${apiBaseUrl}/perfumes`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(perfumeData),
@@ -139,7 +141,7 @@ document.getElementById('createEditForm').addEventListener('submit', async funct
     }
 
     await fetchPerfumes();
-    document.getElementById('perfumeForm').style.display = 'none';
+    document.getElementById('createEditForm').style.display = 'none';
 
   } catch (error) {
     console.error('Error saving perfume:', error.message);
