@@ -25,7 +25,7 @@ export class PerfumeController {
 
     async getPerfumes(request: Request, response: Response): Promise<Response> {
         try {
-            const sorted = request.query.sorted === 'false';
+            const sorted = request.query.sorted === 'true';
             const searchTerm = typeof request.query.searchTerm === 'string' ? request.query.searchTerm : '';
 
             const searchPerfumesOptionsDto: SearchPerfumesOptionsDto = {sorted, searchTerm};
@@ -80,24 +80,6 @@ export class PerfumeController {
                 return response.status(404).json({ message: error.message });
             }
             return response.status(500).json({ message: 'Failed to delete perfume', error: error.message });
-        }
-    }
-
-    async sortPerfumesByName(request: Request, response: Response): Promise<Response> {
-        try {
-            const sortedPerfumes: Array<Perfume> = await this.perfumeService.sortPerfumesByName();
-            return response.status(200).json(sortedPerfumes);
-        } catch (error) {
-            return response.status(500).json({ message: 'Failed to sort perfumes', error: error.message });
-        }
-    }
-
-    async sortPerfumesByPrice(request: Request, response: Response): Promise<Response> {
-        try {
-            const sortedPerfumes: Array<Perfume> = await this.perfumeService.sortPerfumesByPrice();
-            return response.status(200).json(sortedPerfumes);
-        } catch (error) {
-            return response.status(500).json({ message: 'Failed to sort perfumes', error: error.message });
         }
     }
 }
