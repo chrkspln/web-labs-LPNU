@@ -11,19 +11,6 @@
     border-radius: 4px;
 }
 
-.btn-name-sort {
-    padding: 10px 20px;
-    background-color: steelblue;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.btn-name-sort:hover {
-    background-color: royalblue;
-}
-
 .btn-price-sort {
     padding: 10px 20px;
     background-color: steelblue;
