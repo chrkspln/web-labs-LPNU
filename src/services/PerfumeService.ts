@@ -28,7 +28,7 @@ export class PerfumeService {
         if (searchTerm) {
             const terms = searchTerm.split(' ').filter(term => term.length > 0);
             terms.forEach((term, index) => {
-                queryBuilder.andWhere(`LOWER(perfume.brand) LIKE LOWER(:term${index})`, { [`term${index}`]: `%${term}%` });
+                queryBuilder.andWhere(`LOWER(perfume.name) LIKE LOWER(:term${index})`, { [`term${index}`]: `%${term}%` });
             });
         }
 
@@ -36,8 +36,7 @@ export class PerfumeService {
             queryBuilder.orderBy("perfume.price", "ASC");
         }
 
-        const perfumes = await queryBuilder.getMany();
-        return perfumes;
+        return await queryBuilder.getMany();
     }
 
     async createPerfume(createPerfumeDto: CreatePerfumeDto): Promise<Perfume> {

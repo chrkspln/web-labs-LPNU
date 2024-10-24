@@ -10,9 +10,10 @@ dotenv.config();
 AppDataSource.initialize().then(async () => {
     const app = express();
     const PORT = process.env.PORT || 3000;
+    app.use(cors(corsOptions));
+    app.options('*', cors(corsOptions));
     app.use(bodyParser.json());
     app.use("/perfumes", PerfumeRouter);
-    app.use(cors(corsOptions));
 
     app.listen(PORT, () => {
         console.log(`Express server has started on port ${PORT}`);
