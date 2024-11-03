@@ -1,0 +1,33 @@
+header {
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  margin-top: 3rem;
+  background-image: url('../../images/img.png');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  align-content: center;
+}
+
+.header__text-box {
+  margin-left: 1rem;
+}
+
+.header__text-box h2 {
+  text-transform: uppercase;
+  font-size: 20vh;
+  font-family: 'Modern No. 20', sans-serif;
+  line-height: 0.8;
+  color: floralwhite;
+  margin: 0 !important;
+}
+
+.header__text-box p {
+  font-size: 2rem;
+  font-family: 'Inter', sans-serif;
+  color: floralwhite;
+  font-weight: 400;
+  margin: 2rem auto 0;
+}

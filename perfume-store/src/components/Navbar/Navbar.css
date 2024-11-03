@@ -1,0 +1,30 @@
+.navbar {
+    display: flex;
+    width: 100%;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    background-color: #212121;
+    color: floralwhite;
+    padding: 10px 20px;
+    top: 0;
+    z-index: 99;
+}
+
+.navbar-menu {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.navbar-item {
+    text-transform: uppercase;
+    font-size: 1.25rem;
+}
+
+.navbar-item a {
+    text-decoration: none;
+    color: floralwhite;
+    font-weight: bold;
+    transition: text-shadow 0.3s;
+}

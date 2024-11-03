@@ -1,0 +1,65 @@
+.about-us {
+  padding: 40px;
+  margin: auto;
+  width: 90vw;
+  margin-bottom: 5rem;
+}
+
+.about-us h2 {
+  font-size: 5rem;
+  line-height: 0.75;
+  text-align: center;
+  color: #212121;
+}
+
+.company-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.underline-purple {
+  background-image: linear-gradient(to right, mediumpurple, lightpink);
+  background-repeat: no-repeat;
+  background-size: 100% 10%;
+  background-position: 0 75%;
+}
+
+.underline-light_purple {
+  background-image: linear-gradient(to right, darkseagreen, darkolivegreen);
+  background-repeat: no-repeat;
+  background-size: 100% 10%;
+  background-position: 0 75%;
+}
+
+.about-us__container_wrapper {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.about-us__row {
+  display: flex;
+  width: 100%;
+}
+
+.view-more-btn {
+  box-sizing: border-box;
+  background-color: #212121;
+  border: 4px solid #212121;
+  color: floralwhite;
+  justify-self: center;
+  font-size: 1.5rem;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-top: 1.5rem;
+  transition: all 0.1s ease-in;
+  font-weight: 700;
+}
+
+.view-more-btn:hover {
+  border: 4px solid #212121;
+  background: floralwhite;
+  color: #212121;
+}
