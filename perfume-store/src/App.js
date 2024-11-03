@@ -1,19 +1,23 @@
 import React from 'react';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
-import Header from './components/Header/Header';
-import AboutUs from './components/AboutUs/AboutUs';
-import AboutPerfumes from "./components/AboutPerfumes/AboutPerfumes";
+import HomePage from './components/HomePage/HomePage';
+import Catalog from './components/Catalog/Catalog';
 import Footer from './components/Footer/Footer';
 
 function App() {
   return (
-      <div className="App">
-        <Navbar/>
-        <Header/>
-        <AboutUs/>
-        <AboutPerfumes/>
-        <Footer/>
-      </div>
+      <Router>
+          <div className="App">
+              <Navbar/>
+              <Routes>
+                  <Route path="/" element={<HomePage/>} />
+                  <Route path="/public" element={<HomePage/>} />
+                  <Route path="/catalog" element={<Catalog/>} />
+              </Routes>
+              <Footer/>
+          </div>
+      </Router>
   );
 }
 

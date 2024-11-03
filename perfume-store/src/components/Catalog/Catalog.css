@@ -1,0 +1,85 @@
+.catalog-wrapper {
+    padding: 2rem;
+    width: 90%;
+    margin: auto;
+}
+
+.catalog-title {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-top: 5rem;
+    margin-bottom: 2rem;
+}
+
+.catalog-filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    margin-left: 4rem;
+}
+
+.catalog-search {
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    width: 60%;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+}
+
+.catalog-sort {
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    margin-right: 4rem;
+}
+
+.perfumes-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.perfume-card {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+    width: 20%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.perfume-card:hover {
+    transform: scale(1.05);
+}
+
+.perfume__image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+}
+
+
+.perfume__name {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.perfume__brand, .perfume__scent, .perfume__volume {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.perfume__price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
