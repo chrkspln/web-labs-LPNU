@@ -1,85 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./Catalog.css";
 import CatalogItem from "./CatalogItem";
-
-const perfumesData = [
-    {
-        id: 1,
-        image: "https://u.makeup.com.ua/n/ni/ni7ihjitae9n.jpg",
-        name: "Suu...",
-        brand: "Masaki Matsushima",
-        scent: "Floral",
-        volume: 80,
-        price: 1171.00
-    },
-    {
-        id: 2,
-        image: "https://u.makeup.com.ua/i/ia/iaieny15lffq.jpg",
-        name: "Mat.",
-        brand: "Masaki Matsushima",
-        scent: "Floral, Fruity",
-        volume: 40,
-        price: 985.00,
-    },
-    {
-        id: 3,
-        image: "https://u.makeup.com.ua/2/2i/2ilsfzqdamz8.jpg",
-        name: "Marry Me!",
-        brand: "Lanvin",
-        scent: "Floral, Fruity",
-        volume: 30,
-        price: 1007.00,
-    },
-    {
-        id: 4,
-        image: "https://u.makeup.com.ua/l/lb/lb3pc4dvmtni.jpg",
-        name: "Parfum d'Ete",
-        brand: "Kenzo",
-        scent: "Floral, Green",
-        volume: 75,
-        price: 2428.00,
-    },
-    {
-        id: 5,
-        image: "https://u.makeup.com.ua/n/nw/nwn0ywjtkcse.jpg",
-        name: "Noa",
-        brand: "Cacharel",
-        scent: "Floral, Aldehyde",
-        volume: 30,
-        price: 909.00,
-    },
-    {
-        id: 6,
-        image: "https://u.makeup.com.ua/x/x8/x8z4nepptnlu.jpg",
-        name: "Equus Pour Homme",
-        brand: "Lalique",
-        scent: "Woody, Spicy",
-        volume: 100,
-        price: 1976.00,
-    },
-    {
-        id: 7,
-        image: "https://u.makeup.com.ua/l/lu/lubnk6it3zmu.jpg",
-        name: "Terre d'Hermès",
-        brand: "Hermès",
-        scent: "Woody, Mineral",
-        volume: 100,
-        price: 2695.00,
-    },
-    {
-        id: 8,
-        image: "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQQfGZ9qAW8slpgCTCEEYl1na0p875WkN1IAWYzaPoyl45bYYrqMYoIc8w-yhZykgQ_t-S0YiTnU3bTljHMK5rEcqOPa8hwDgCDKhA_tkuOuaZm6HPiLrIEHA&usqp=CAE",
-        name: "Armani Code",
-        brand: "Giorgio Armani",
-        scent: "Woody, Aromatic",
-        volume: 60,
-        price: 1742.00,
-    }
-]
+import { PerfumeContext } from "../../context/PerfumeContext";
 
 const Catalog = () => {
+    const { perfumes } = useContext(PerfumeContext);
     const [searchTerm, setSearchTerm] = useState("");
     const [sortType, setSortType] = useState("default");
+    const [minPrice, setMinPrice] = useState("");
+    const [maxPrice, setMaxPrice] = useState("");
 
     const handleSearchChange = (event) => {
         setSearchTerm(event.target.value);
@@ -89,17 +18,38 @@ const Catalog = () => {
         setSortType(event.target.value);
     };
 
-    const filteredPerfumes = perfumesData
-        .filter(
-            (perfumes) =>
-                perfumes.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                perfumes.scent.toLowerCase().includes(searchTerm.toLowerCase())
-        )
+    const handleMinPriceChange = (event) => {
+        setMinPrice(event.target.value);
+    };
+
+    const handleMaxPriceChange = (event) => {
+        setMaxPrice(event.target.value);
+    };
+
+    const handleClearFilters = () => {
+        setMinPrice("");
+        setMaxPrice("");
+    };
+
+    const filteredPerfumes = perfumes
+        .filter((perfume) => {
+            const matchesSearchTerm =
+                perfume.name.toLowerCase().includes(searchTerm.trim().toLowerCase()) ||
+                perfume.scent.toLowerCase().includes(searchTerm.trim().toLowerCase());
+            const matchesPriceRange =
+                (minPrice === "" || perfume.price >= parseInt(minPrice)) &&
+                (maxPrice === "" || perfume.price <= parseInt(maxPrice));
+            return matchesSearchTerm && matchesPriceRange;
+        })
         .sort((a, b) => {
             if (sortType === "asc") {
                 return a.price - b.price;
             } else if (sortType === "desc") {
                 return b.price - a.price;
+            } else if (sortType === "volume-asc") {
+                return parseInt(a.volume || 0) - parseInt(b.volume || 0);
+            } else if (sortType === "volume-desc") {
+                return parseInt(b.volume || 0) - parseInt(a.volume || 0);
             } else {
                 return 0;
             }
@@ -117,16 +67,48 @@ const Catalog = () => {
                     onChange={handleSearchChange}
                     className="catalog-search"
                 />
+
+                <div className="price-range-filters">
+                    <input
+                        type="number"
+                        placeholder="From"
+                        value={minPrice}
+                        onChange={handleMinPriceChange}
+                        className="catalog-price-input"
+                    />
+                    <input
+                        type="number"
+                        placeholder="To"
+                        value={maxPrice}
+                        onChange={handleMaxPriceChange}
+                        className="catalog-price-input"
+                    />
+                    <button className="catalog-clear-btn" onClick={handleClearFilters}>
+                        Clear
+                    </button>
+                </div>
+
                 <select value={sortType} onChange={handleSortChange} className="catalog-sort">
                     <option value="default">Sort by Price</option>
                     <option value="asc">Price: Low to High</option>
                     <option value="desc">Price: High to Low</option>
+                    <option value="volume-asc">Volume: Low to High</option>
+                    <option value="volume-desc">Volume: High to Low</option>
                 </select>
             </div>
 
             <div className="perfumes-grid">
-                {filteredPerfumes.map((perfumes) => (
-                    <CatalogItem key={perfumes.id} image={perfumes.image} name={perfumes.name} brand={perfumes.brand} scent={perfumes.scent} volume={perfumes.volume} price={perfumes.price} />
+                {filteredPerfumes.map((perfume) => (
+                    <CatalogItem
+                        key={perfume.id}
+                        id={perfume.id}
+                        image={perfume.image}
+                        name={perfume.name}
+                        brand={perfume.brand}
+                        scent={perfume.scent}
+                        volume={perfume.volume}
+                        price={perfume.price}
+                    />
                 ))}
             </div>
         </div>
