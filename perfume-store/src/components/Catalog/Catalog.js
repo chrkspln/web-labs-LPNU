@@ -1,59 +1,64 @@
-import React, { useState, useContext } from "react";
+import React, {useState, useEffect} from "react";
 import "./Catalog.css";
 import CatalogItem from "./CatalogItem";
-import { PerfumeContext } from "../../context/PerfumeContext";
+import {getPerfumes} from "../../service/api";
+import Button from "../../utilities/Button";
+import Input from "../../utilities/Input";
+import Select from "../../utilities/Select";
+import Loader from "../../utilities/Loader";
 
 const Catalog = () => {
-    const { perfumes } = useContext(PerfumeContext);
+    const [perfumes, setPerfumes] = useState([]);
+    const [loading, setLoading] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
-    const [sortType, setSortType] = useState("default");
+    const [sortType, setSortType] = useState("asc");
     const [minPrice, setMinPrice] = useState("");
     const [maxPrice, setMaxPrice] = useState("");
 
-    const handleSearchChange = (event) => {
-        setSearchTerm(event.target.value);
+    const sortOptions = [
+        {value: "asc", label: "Price: Low to High"},
+        {value: "desc", label: "Price: High to Low"},
+        {value: "volume-asc", label: "Volume: Low to High"},
+        {value: "volume-desc", label: "Volume: High to Low"}
+    ];
+
+    const fetchFilteredPerfumes = (searchTerm = '', minPrice  = '', maxPrice = '', sortType = '') => {
+        setLoading(true);
+        getPerfumes(searchTerm, minPrice, maxPrice, sortType).then((response) => {
+            setPerfumes(response.data);
+            setLoading(false);
+        })
+            .catch((error) => {
+                console.error('Error fetching data: ', error);
+                setLoading(false);
+            });
+    }
+
+    useEffect(() => {
+        fetchFilteredPerfumes();
+    }, []);
+
+    const handleSearchChange = () => {
+        fetchFilteredPerfumes(searchTerm.trim(), minPrice, maxPrice, sortType);
     };
 
-    const handleSortChange = (event) => {
-        setSortType(event.target.value);
+
+    const handlePriceOkClick = () => {
+        fetchFilteredPerfumes(searchTerm.trim(), minPrice, maxPrice, sortType);
     };
 
-    const handleMinPriceChange = (event) => {
-        setMinPrice(event.target.value);
-    };
-
-    const handleMaxPriceChange = (event) => {
-        setMaxPrice(event.target.value);
+    const handleSortChange = (e) => {
+        setSortType(e.target.value);
+        fetchFilteredPerfumes(searchTerm.trim(), minPrice, maxPrice, sortType);
     };
 
     const handleClearFilters = () => {
+        setSearchTerm("");
         setMinPrice("");
         setMaxPrice("");
+        setSortType("asc");
+        fetchFilteredPerfumes();
     };
-
-    const filteredPerfumes = perfumes
-        .filter((perfume) => {
-            const matchesSearchTerm =
-                perfume.name.toLowerCase().includes(searchTerm.trim().toLowerCase()) ||
-                perfume.scent.toLowerCase().includes(searchTerm.trim().toLowerCase());
-            const matchesPriceRange =
-                (minPrice === "" || perfume.price >= parseInt(minPrice)) &&
-                (maxPrice === "" || perfume.price <= parseInt(maxPrice));
-            return matchesSearchTerm && matchesPriceRange;
-        })
-        .sort((a, b) => {
-            if (sortType === "asc") {
-                return a.price - b.price;
-            } else if (sortType === "desc") {
-                return b.price - a.price;
-            } else if (sortType === "volume-asc") {
-                return parseInt(a.volume || 0) - parseInt(b.volume || 0);
-            } else if (sortType === "volume-desc") {
-                return parseInt(b.volume || 0) - parseInt(a.volume || 0);
-            } else {
-                return 0;
-            }
-        });
 
     return (
         <div className="catalog-wrapper">
@@ -64,41 +69,51 @@ const Catalog = () => {
                     type="text"
                     placeholder="Search by name or scent"
                     value={searchTerm}
-                    onChange={handleSearchChange}
+                    onChange={(e) => setSearchTerm(e.target.value)}
                     className="catalog-search"
                 />
+                <Button onClick={handleSearchChange} className="catalog-search-btn">
+                    Search
+                </Button>
 
                 <div className="price-range-filters">
-                    <input
+                    <Input
                         type="number"
                         placeholder="From"
                         value={minPrice}
-                        onChange={handleMinPriceChange}
+                        onChange={(e) => setMinPrice(e.target.value)}
                         className="catalog-price-input"
                     />
-                    <input
+                    <Input
                         type="number"
                         placeholder="To"
                         value={maxPrice}
-                        onChange={handleMaxPriceChange}
+                        onChange={(e) => setMaxPrice(e.target.value)}
                         className="catalog-price-input"
                     />
-                    <button className="catalog-clear-btn" onClick={handleClearFilters}>
-                        Clear
-                    </button>
+                    <Button onClick={handlePriceOkClick} className="catalog-search-btn">
+                        OK
+                    </Button>
                 </div>
 
-                <select value={sortType} onChange={handleSortChange} className="catalog-sort">
-                    <option value="default">Sort by Price</option>
-                    <option value="asc">Price: Low to High</option>
-                    <option value="desc">Price: High to Low</option>
-                    <option value="volume-asc">Volume: Low to High</option>
-                    <option value="volume-desc">Volume: High to Low</option>
-                </select>
+                <Select
+                    options={sortOptions}
+                    value={sortType}
+                    onChange={(e) => handleSortChange(e)}
+                />
+
+                <div className="filter-actions">
+                    <Button onClick={handleClearFilters} className="catalog-clear-btn">
+                        Clear Filters
+                    </Button>
+                </div>
             </div>
 
+            {loading ? (
+                <Loader/>
+            ) : (
             <div className="perfumes-grid">
-                {filteredPerfumes.map((perfume) => (
+                {perfumes.map((perfume) => (
                     <CatalogItem
                         key={perfume.id}
                         id={perfume.id}
@@ -111,6 +126,7 @@ const Catalog = () => {
                     />
                 ))}
             </div>
+                )}
         </div>
     );
 };

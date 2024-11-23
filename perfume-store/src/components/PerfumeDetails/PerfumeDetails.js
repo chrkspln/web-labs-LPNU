@@ -1,17 +1,36 @@
-import React, { useContext } from 'react';
+import React, {useEffect, useState} from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { PerfumeContext } from '../../context/PerfumeContext';
+import Loader from "../../utilities/Loader";
+import Select from '../../utilities/Select';
 import './PerfumeDetails.css';
+import {getPerfumeById} from "../../service/api";
 
 const PerfumeDetails = () => {
-    const { perfumes } = useContext(PerfumeContext);
     const { id } = useParams();
     const navigate = useNavigate();
-    const perfume = perfumes.find(perfume => perfume.id == id);
+    const [perfume, setPerfume] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [selectedVolume, setSelectedVolume] = useState("");
 
-    console.log("Route ID:", id);
-    console.log("Perfumes:", perfumes);
-    console.log("Perfume Details:", perfume);
+    const volumes = [
+        {value: "20", label: "20 ml"},
+        {value: "30", label: "30 ml"},
+        {value: "50", label: "50 ml"},
+        {value: "75", label: "75 ml"},
+        {value: "100", label: "100 ml"}
+    ];
+
+    useEffect(() => {
+        setLoading(true);
+        getPerfumeById(id).then((response) => {
+            setPerfume(response.data);
+            setLoading(false);
+        })
+            .catch((error) => {
+                console.error('Error fetching data: ', error);
+                setLoading(false);
+            });
+    }, [id]);
 
     if (!perfume) {
         return <div className="container mx-auto px-4 py-8">Perfume not found</div>;
@@ -21,7 +40,14 @@ const PerfumeDetails = () => {
         navigate('/catalog');
     };
 
-    const volumes = ["15ml", "30ml", "50ml", "75ml", "100ml"];
+    const handleVolumeChange = (event) => {
+        setSelectedVolume(event.target.value);
+    }
+
+    if (loading) {
+        return <Loader />;
+    }
+
 
     return (
         <div className="perfume-detail-container">
@@ -36,12 +62,11 @@ const PerfumeDetails = () => {
                     <div className="perfume-detail-add-info">
                         <div className="perfume-selector-container">
                             <h4>Select Volume:</h4>
-                            <select className="perfume-selector">
-                                <option value="">Select</option>
-                                {volumes.map((volume) => (
-                                    <option key={volume} value={volume}>{volume}</option>
-                                ))}
-                            </select>
+                            <Select
+                                options={volumes}
+                                value={selectedVolume}
+                                onChange={handleVolumeChange}
+                            />
                         </div>
                     </div>
 
