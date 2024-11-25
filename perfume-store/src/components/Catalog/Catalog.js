@@ -72,7 +72,7 @@ const Catalog = () => {
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="catalog-search"
                 />
-                <Button onClick={handleSearchChange} className="catalog-search-btn">
+                <Button onClick={handleSearchChange} className="search-btn">
                     Search
                 </Button>
 
@@ -91,7 +91,7 @@ const Catalog = () => {
                         onChange={(e) => setMaxPrice(e.target.value)}
                         className="catalog-price-input"
                     />
-                    <Button onClick={handlePriceOkClick} className="catalog-search-btn">
+                    <Button onClick={handlePriceOkClick} className="price-ok-btn">
                         OK
                     </Button>
                 </div>
