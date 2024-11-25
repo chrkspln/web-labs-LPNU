@@ -27,7 +27,11 @@ let products = [
             Base: "Cedar, Musk"
         },
         volume: 80,
-        price: 1171.00
+        price: 1171.00,
+        stock: [
+            { volume: 80, quantity: 6 },
+            { volume: 40, quantity: 4 }
+        ]
     },
     {
         id: 2,
@@ -45,6 +49,11 @@ let products = [
         },
         volume: 40,
         price: 985.00,
+        stock: [
+            { volume: 40, quantity: 3 },
+            { volume: 80, quantity: 7 },
+            { volume: 100, quantity: 2 }
+        ]
     },
     {
         id: 3,
@@ -62,6 +71,10 @@ let products = [
         },
         volume: 30,
         price: 1007.00,
+        stock: [
+            { volume: 30, quantity: 5 },
+            { volume: 50, quantity: 3 }
+        ]
     },
     {
         id: 4,
@@ -79,6 +92,11 @@ let products = [
         },
         volume: 75,
         price: 2428.00,
+        stock: [
+            { volume: 75, quantity: 4 },
+            { volume: 50, quantity: 2 },
+            { volume: 100, quantity: 3 }
+        ]
     },
     {
         id: 5,
@@ -97,6 +115,10 @@ let products = [
         },
         volume: 30,
         price: 909.00,
+        stock: [
+            { volume: 30, quantity: 5 },
+            { volume: 50, quantity: 3 }
+        ]
     },
     {
         id: 6,
@@ -115,6 +137,10 @@ let products = [
         },
         volume: 100,
         price: 1976.00,
+        stock: [
+            { volume: 100, quantity: 5 },
+            { volume: 200, quantity: 3 }
+        ]
     },
     {
         id: 7,
@@ -132,6 +158,10 @@ let products = [
         },
         volume: 100,
         price: 2695.00,
+        stock: [
+            { volume: 100, quantity: 5 },
+            { volume: 200, quantity: 3 }
+        ]
     },
     {
         id: 8,
@@ -149,6 +179,10 @@ let products = [
         },
         volume: 60,
         price: 1742.00,
+        stock: [
+            { volume: 20, quantity: 5 },
+            { volume: 100, quantity: 3 }
+        ]
     }
 ];
 

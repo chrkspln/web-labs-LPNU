@@ -1,23 +1,29 @@
 import React, {useEffect, useState} from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import {useDispatch} from "react-redux";
 import Loader from "../../utilities/Loader";
 import Select from '../../utilities/Select';
 import './PerfumeDetails.css';
 import {getPerfumeById} from "../../service/api";
+import {addToCart} from "../../redux/cartActions";
+import Input from "../../utilities/Input";
 
 const PerfumeDetails = () => {
     const { id } = useParams();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [perfume, setPerfume] = useState(null);
     const [loading, setLoading] = useState(true);
     const [selectedVolume, setSelectedVolume] = useState("");
+    const [selectedQuantity, setQuantity] = useState(1);
+    const [maxStock, setMaxStock] = useState(0);
 
     const volumes = [
-        {value: "20", label: "20 ml"},
-        {value: "30", label: "30 ml"},
-        {value: "50", label: "50 ml"},
-        {value: "75", label: "75 ml"},
-        {value: "100", label: "100 ml"}
+        { value: '', label: 'Select Volume' },
+        ...perfume?.stock.map(stockItem => ({
+            value: stockItem.volume,
+            label: stockItem.volume + ' ml'
+        })) || []
     ];
 
     useEffect(() => {
@@ -40,14 +46,47 @@ const PerfumeDetails = () => {
         navigate('/catalog');
     };
 
+    const handleGoToCart = () => {
+        navigate('/cart');
+    }
+
     const handleVolumeChange = (event) => {
-        setSelectedVolume(event.target.value);
+        const volume = event.target.value;
+        setSelectedVolume(volume);
+        setQuantity(1);
+
+        const selectedStockItem = perfume.stock.find(stock => stock.volume === parseInt(volume, 10));
+        console.log(selectedStockItem);
+        selectedStockItem ? setMaxStock(selectedStockItem.quantity) : setMaxStock(0);
+    };
+
+    const handleQuantityChange = (event) => {
+        const newQuantity = Number(event.target.value);
+        if (newQuantity > maxStock) {
+            setQuantity(maxStock);
+            alert(`Only ${maxStock} items are available in ${selectedVolume} volume.`);
+        } else {
+            setQuantity(newQuantity);
+        }
+    };
+
+    const handleAddToCart = () => {
+        if (!selectedVolume) {
+            alert("Please select a volume.");
+            return;
+        }
+        dispatch(
+            addToCart({
+                ...perfume,
+                selectedQuantity,       // User-defined quantity
+                selectedVolume, // User-selected volume
+            })
+        );
     }
 
     if (loading) {
         return <Loader />;
     }
-
 
     return (
         <div className="perfume-detail-container">
@@ -70,6 +109,19 @@ const PerfumeDetails = () => {
                         </div>
                     </div>
 
+                    <div className="perfume-quantity-container">
+                        <h4>Select Quantity:</h4>
+                        <Input
+                            type="number"
+                            value={selectedQuantity}
+                            min="1"
+                            max={maxStock}
+                            onChange={handleQuantityChange}
+                            disabled={!selectedVolume}
+                        />
+                        {selectedVolume && !maxStock && <p>No stock available for this volume</p>}
+                    </div>
+
                     {perfume.characteristics && (
                         <div className="characteristics-grid">
                             {Object.entries(perfume.characteristics).map(([key, value]) => (
@@ -87,7 +139,8 @@ const PerfumeDetails = () => {
                 <p className="perfume-price">Price: ₴{perfume.price.toLocaleString()}</p>
                 <div className="action-buttons">
                     <button onClick={handleGoBack}>Go Back</button>
-                    <button>Add to Cart</button>
+                    <button onClick={handleAddToCart}>Add to Cart</button>
+                    <button onClick={handleGoToCart}>Go to Cart</button>
                 </div>
             </div>
         </div>
