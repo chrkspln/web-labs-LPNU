@@ -48,9 +48,11 @@ const Catalog = () => {
     };
 
     const handleSortChange = (e) => {
-        setSortType(e.target.value);
-        fetchFilteredPerfumes(searchTerm.trim(), minPrice, maxPrice, sortType);
+        const newSortType = e.target.value;
+        setSortType(newSortType);
+        fetchFilteredPerfumes(searchTerm.trim(), minPrice, maxPrice, newSortType);
     };
+
 
     const handleClearFilters = () => {
         setSearchTerm("");
@@ -81,15 +83,22 @@ const Catalog = () => {
                         type="number"
                         placeholder="From"
                         value={minPrice}
-                        onChange={(e) => setMinPrice(e.target.value)}
+                        onChange={(e) => {
+                            const value = e.target.value;
+                            setMinPrice(value === "" || value >= 0 ? value : 0);
+                        }}
                         className="catalog-price-input"
                     />
+
                     <Input
                         type="number"
                         placeholder="To"
                         value={maxPrice}
-                        onChange={(e) => setMaxPrice(e.target.value)}
                         className="catalog-price-input"
+                        onChange={(e) => {
+                            const value = e.target.value;
+                            setMaxPrice(value === "" || value >= 0 ? value : 0);
+                        }}
                     />
                     <Button onClick={handlePriceOkClick} className="price-ok-btn">
                         OK

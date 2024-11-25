@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { removeFromCart, clearCart } from '../../redux/cartActions';
 import Button from '../../utilities/Button';
 import './Cart.css';
@@ -7,6 +8,7 @@ import './Cart.css';
 const Cart = () => {
     const cartItems = useSelector((state) => state.cart.cartItems);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleRemove = (id, selectedVolume) => {
         dispatch(removeFromCart(id, selectedVolume));
@@ -14,6 +16,10 @@ const Cart = () => {
 
     const handleClearCart = () => {
         dispatch(clearCart());
+    };
+
+    const handleProceedToCheckout = () => {
+        navigate('/checkout');
     };
 
     const getTotalPrice = () => {
@@ -59,7 +65,7 @@ const Cart = () => {
                         <Button className="clear-cart-button" onClick={handleClearCart}>
                             Clear Cart
                         </Button>
-                        <Button className="checkout-button">Proceed to Checkout</Button>
+                        <Button className="checkout-button" onClick={handleProceedToCheckout}>Proceed to Checkout</Button>
                     </div>
                 </>
             )}
