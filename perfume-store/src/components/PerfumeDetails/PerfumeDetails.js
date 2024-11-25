@@ -82,6 +82,7 @@ const PerfumeDetails = () => {
                 selectedVolume, // User-selected volume
             })
         );
+        alert("Item added to cart");
     }
 
     if (loading) {

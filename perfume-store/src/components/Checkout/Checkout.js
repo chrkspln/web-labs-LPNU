@@ -17,8 +17,12 @@ const Checkout = () => {
             .max(20, 'Last name must be 20 characters or less')
             .required('Last name is required'),
         email: Yup.string()
-            .email('Invalid email address')
-            .required('Email is required'),
+            .email('Email is invalid')
+            .required('Email is required')
+            .matches(
+                /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/,
+                'Email must contain a dot'
+            ),
         phone: Yup.string()
             .matches(/^[0-9]{10}$/, 'Phone number must be exactly 10 digits')
             .required('Phone number is required'),
