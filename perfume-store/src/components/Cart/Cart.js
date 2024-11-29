@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { removeFromCart, clearCart } from '../../redux/cartActions';
+import {removeFromCart, clearCart} from '../../redux/cartActions';
 import Button from '../../utilities/Button';
 import './Cart.css';
 

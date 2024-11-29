@@ -1,6 +1,7 @@
 import React from "react";
 import './Catalog.css';
 import {Link} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 const CatalogItem = ({
                          id,
@@ -11,6 +12,8 @@ const CatalogItem = ({
                          volume,
                          price
 }) => {
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+
     return (
         <div className="perfume-card">
             <img src={image} alt={name} className="perfume__image" />
@@ -19,9 +22,15 @@ const CatalogItem = ({
             <p className="perfume__scent">{scent}</p>
             <p className="perfume__volume">{volume} ml</p>
             <p className="perfume__price">₴{price.toLocaleString()}</p>
-            <Link to={`/perfume/${id}`} className="view-details-link">
-                View Details
-            </Link>
+            {isAuthenticated ? (
+                <Link to={`/perfume/${id}`} className="view-details-link">
+                    View Details
+                </Link>
+            ) : (
+                <Link to="/login" className="view-details-link">
+                    Log in to view Details
+                </Link>
+            )}
         </div>
     );
 }

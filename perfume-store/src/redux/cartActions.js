@@ -18,9 +18,9 @@ export const addToCart = (item) => {
     };
 };
 
-export const removeFromCart = (id, selectedColor) => {
+export const removeFromCart = (id, selectedVolume) => {
     return (dispatch, getState) => {
-        dispatch({ type: REMOVE_FROM_CART, payload: { id, selectedColor } });
+        dispatch({ type: REMOVE_FROM_CART, payload: { id, selectedVolume } });
         saveCartToLocalStorage(getState().cart.cartItems);
     };
 };

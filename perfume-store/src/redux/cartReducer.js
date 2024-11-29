@@ -5,15 +5,16 @@ const initialState = {
 };
 
 const cartReducer = (state = initialState, action) => {
+    let updatedCartItems = [];
     switch (action.type) {
         case SET_CART:
             return { ...state, cartItems: action.payload };
 
         case ADD_TO_CART:
             const existingItemIndex = state.cartItems.findIndex(
-                (item) => item.id == action.payload.id && item.selectedVolume == action.payload.selectedVolume
+                (item) => item.id == action.payload.id &&
+                    item.selectedVolume == action.payload.selectedVolume
             );
-            let updatedCartItems;
             if (existingItemIndex >= 0) {
                 updatedCartItems = [...state.cartItems];
                 updatedCartItems[existingItemIndex].selectedQuantity += action.payload.selectedQuantity;

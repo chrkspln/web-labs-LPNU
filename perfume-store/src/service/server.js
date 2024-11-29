@@ -1,5 +1,8 @@
 const express = require('express');
 const cors = require('cors');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const bodyParser = require('body-parser');
 
 const app = express();
 const PORT = process.env.PORT || 6156;
@@ -7,6 +10,7 @@ const PORT = process.env.PORT || 6156;
 
 app.use(cors());
 app.use(express.json());
+app.use(bodyParser.json());
 const path = require('path')
 app.use('/static', express.static(path.join(__dirname, 'public')))
 
@@ -186,6 +190,9 @@ let products = [
     }
 ];
 
+const users = [];
+const JWT_SECRET = "my_secret";
+
 app.get('/api/products', (req, res) => {
     const { search_term, min_price, max_price, sort } = req.query;
 
@@ -227,6 +234,60 @@ app.get('/api/products/:id', (req, res) => {
     }
 
     res.json(product);
+});
+
+app.post('/api/auth/signup', async (req, res) => {
+    const { email, username, password } = req.body;
+
+    if (!email || !username || !password) {
+        return res.status(400).json({ message: 'Email, username, and password are required.' });
+    }
+
+    const userExists = users.find((user) => user.email === email);
+    if (userExists) {
+        return res.status(400).json({ message: 'User already exists with this email.' });
+    }
+
+    try {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const newUser = { email, username, password: hashedPassword };
+        users.push(newUser);
+        const token = jwt.sign({ email: newUser.email, username: newUser.username }, JWT_SECRET, {
+            expiresIn: '1h',
+        });
+        res.status(201).json({
+            message: 'User registered successfully',
+            token,
+        });
+    } catch (err) {
+        res.status(500).json({ message: 'Internal server error', error: err.message });
+    }
+});
+
+app.post('/api/auth/signin', async (req, res) => {
+    const { email, password } = req.body;
+    if (!email || !password) {
+        return res.status(400).json({ message: 'Email and password are required.' });
+    }
+    const user = users.find((user) => user.email === email); // Replace with a real DB lookup
+    if (!user) {
+        return res.status(404).json({ message: 'User not found.' });
+    }
+    try {
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
+            return res.status(401).json({ message: 'Invalid password.' });
+        }
+        const token = jwt.sign({ email: user.email, username: user.username }, JWT_SECRET, {
+            expiresIn: '1h',
+        });
+        res.status(200).json({
+            message: 'Login successful',
+            token,
+        });
+    } catch (err) {
+        res.status(500).json({ message: 'Internal server error', error: err.message });
+    }
 });
 
 app.listen(PORT, () => {

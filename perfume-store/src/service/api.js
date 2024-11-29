@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+const API_DOMAIN = 'http://localhost:6156/';
 const API_URL = 'http://localhost:6156/api/products';
 
 export const getPerfumes = (searchTerm = '', minPrice = '', maxPrice = '', sortType = '') => {
@@ -29,4 +30,8 @@ export const getPerfumeById = (id) => {
             console.error(`Error fetching perfume with ID ${id}:`, error);
             throw error;
         });
+};
+
+export const signupUser = (email, username, password) => {
+    return axios.post(`${API_DOMAIN}api/auth/signup`, { email, username, password });
 };
