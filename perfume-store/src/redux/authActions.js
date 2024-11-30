@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from './actionTypes';
+import {clearCart} from "./cartActions";
 
 export const loginUser = (email, password) => async (dispatch) => {
     try {
@@ -15,5 +16,6 @@ export const loginUser = (email, password) => async (dispatch) => {
 
 export const logoutUser = () => (dispatch) => {
     localStorage.removeItem('token');
+    dispatch(clearCart());
     dispatch({ type: LOGOUT });
 };

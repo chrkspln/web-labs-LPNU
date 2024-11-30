@@ -269,7 +269,7 @@ app.post('/api/auth/signin', async (req, res) => {
     if (!email || !password) {
         return res.status(400).json({ message: 'Email and password are required.' });
     }
-    const user = users.find((user) => user.email === email); // Replace with a real DB lookup
+    const user = users.find((user) => user.email === email);
     if (!user) {
         return res.status(404).json({ message: 'User not found.' });
     }
